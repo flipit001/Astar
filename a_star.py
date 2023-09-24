@@ -153,7 +153,7 @@ class A_Star:
                 klow = k
 
         if klow == 1000:
-            return "impossible", "impossible"
+            return "impossible", 0
         return self.explore(f_costs[klow].coords)
 
 
@@ -162,7 +162,9 @@ if __name__ == "__main__":
         [[1, 0, 0, 0], [9, 9, 9, 0], [0, 0, 0, 0], [2, 0, 0, 0]], (0, 0), (3, 0)
     )
     score, path = a_star.explore((0, 0))
-    print(f"solution is {path}; and it takes ~ {a_star.f_cost_list(path) / 10} units;")
+    print(
+        f"solution is {path}; and it takes ~ {a_star.f_cost_list(path) / 10 if path != 0 else 0} units;"
+    )
 
     print(f"took {a_star.moves} iterations to find solution")
     # print(a_star.get_moves(a_star.arr_data[(0, 1)]))
