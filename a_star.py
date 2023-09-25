@@ -24,7 +24,7 @@ class PriorityQueue:
         return len(self.arr) != 0
 
     def sort_arr(self):
-        self.arr.sort(key=lambda x: x[0])
+        self.arr.sort(key=lambda x: x[0], reverse=True)
 
     def insert(self, priority, value):
         vp = (priority, value)
@@ -164,6 +164,7 @@ class A_Star:
                             curnode.moves = steps
                             curnode.cfrom = self.arr_data[(x, y)]
                             curnode.f_cost = self.get_f_cost((i, j))
+                            print(curnode.f_cost, curnode.coords)
                             curnode.coords = (i, j)
                             f_costs[curnode.f_cost] = curnode
 
@@ -172,13 +173,14 @@ class A_Star:
             return self.get_moves(self.arr_data[self.end])
         for k, v in f_costs.items():
             self.queue.insert(k, v)
+            # print(self.queue)
 
         return self.explore(self.queue.pop().coords)
 
 
 if __name__ == "__main__":
     a_star = A_Star(
-        [[1, 0, 9, 0], [0, 9, 0, 0], [0, 9, 0, 0], [9, 9, 0, 0], [2, 0, 0, 0]],
+        [[1, 0, 0, 0], [0, 9, 0, 0], [0, 9, 0, 0], [9, 9, 0, 0], [2, 0, 0, 0]],
         (0, 0),
         (4, 0),
     )
