@@ -24,7 +24,7 @@ class PriorityQueue:
         return len(self.arr) != 0
 
     def sort_arr(self):
-        self.arr.sort(key=lambda x: x[0], reverse=True)
+        self.arr.sort(key=lambda x: x[0])
 
     def insert(self, priority, value):
         vp = (priority, value)
@@ -32,7 +32,7 @@ class PriorityQueue:
         self.sort_arr()
 
     def pop(self):
-        return self.arr.pop()[1]
+        return self.arr.pop(0)[1]
 
 
 class A_Star:
