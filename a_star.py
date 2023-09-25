@@ -183,9 +183,7 @@ if __name__ == "__main__":
         (4, 0),
     )
     score, path = a_star.explore((0, 0))
-    print(
-        f"solution is {path}; and it takes ~ {a_star.f_cost_list(path) / 10 if path != 0 else 0} units;"
-    )
+    print(f"solution is {path};")
 
     print(f"took {a_star.moves} iterations to find solution")
     # print(a_star.get_moves(a_star.arr_data[(0, 1)]))
