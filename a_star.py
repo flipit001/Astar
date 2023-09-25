@@ -13,6 +13,28 @@ class Node:
         self.coords = coords
 
 
+class PriorityQueue:
+    def __init__(self):
+        self.arr = []
+
+    def __repr__(self):
+        return f"{self.arr}"
+
+    def empty(self):
+        return len(self.arr) != 0
+
+    def sort_arr(self):
+        self.arr.sort(key=lambda x: x[0])
+
+    def insert(self, priority, value):
+        vp = (priority, value)
+        self.arr.append(vp)
+        self.sort_arr()
+
+    def pop(self):
+        return self.arr.pop()[1]
+
+
 class A_Star:
     def __init__(self, arr, start, end, blockers=9):
         self.start = start
@@ -28,6 +50,7 @@ class A_Star:
         self.moves = 1
         # print(self.arr_data)
         self.arr_data[self.start] = Node(None, None, 0)
+        self.queue = PriorityQueue()
 
     def find_replace(self, arr, f, r):
         for i in range(len(arr)):
@@ -147,19 +170,17 @@ class A_Star:
         self.moves += 1
         if flag:
             return self.get_moves(self.arr_data[self.end])
-        klow = 1000
         for k, v in f_costs.items():
-            if k < klow and v.coords not in path:
-                klow = k
+            self.queue.insert(k, v)
 
-        if klow == 1000:
-            return "impossible", 0
-        return self.explore(f_costs[klow].coords)
+        return self.explore(self.queue.pop().coords)
 
 
 if __name__ == "__main__":
     a_star = A_Star(
-        [[1, 0, 0, 0], [9, 9, 9, 0], [0, 0, 0, 0], [2, 0, 0, 0]], (0, 0), (3, 0)
+        [[1, 0, 9, 0], [0, 9, 0, 0], [0, 9, 0, 0], [9, 9, 0, 0], [2, 0, 0, 0]],
+        (0, 0),
+        (4, 0),
     )
     score, path = a_star.explore((0, 0))
     print(
