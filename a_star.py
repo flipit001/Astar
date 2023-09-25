@@ -185,7 +185,7 @@ if __name__ == "__main__":
         (4, 0),
     )
     score, path = a_star.explore((0, 0))
-    print(f"solution is {path};")
+    print(f"solution is {path[::-1]};")
 
     print(f"took {a_star.moves} iterations to find solution")
     # print(a_star.get_moves(a_star.arr_data[(0, 1)]))
