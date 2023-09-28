@@ -98,28 +98,6 @@ class A_Star:
         return DIAGONAL * min(x_dist, y_dist) + abs(x_dist - y_dist) * 10
 
 
-    def convert(self, t):
-        output = [None, None]
-        for i in range(2):
-            if t[i] == 0:
-                output[i] = 0
-                continue
-            if t[i] < 0:
-                output[i] = -1
-            if t[i] > 0:
-                output[i] = 1
-        return tuple(output)
-
-    def f_cost_list(self, l: list[tuple]):
-        output = []
-        for i in l:
-            output.append(self.convert(i))
-        sum_ = 0
-        for i in output:
-            sum_ += self.get_f_cost(i)
-
-        return sum_
-
     def get_f_cost(self, t):
         if self.in_bound(t):
             return self.dist_from(self.start, t) + self.dist_from(self.end, t)
