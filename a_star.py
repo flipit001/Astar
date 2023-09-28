@@ -1,8 +1,8 @@
+from time import time
 STRAIGHT = 10
 DIAGONAL = 14
 t_addition = lambda t1, t2: (t1[0] + t2[0], t1[1] + t2[1])
 t_subtraction = lambda t1, t2: (t1[0] - t2[0], t1[1] - t2[1])
-is_diagonal = lambda t: t[0] != 0 and t[1] != 0
 
 
 class Node:
@@ -90,27 +90,13 @@ class A_Star:
         # ):
         #     return False
         # return not (self.arr[t[0]][t[1]] == self.blockers)
-
     def dist_from(self, t1, t2):
-        moves = []
-        cur_pos = t2
-        # move = convert(t_subtraction(t1, cur_pos))
-        # cur_pos = t_addition(cur_pos, move)
-        # print(cur_pos)
-        while not cur_pos == t1:
-            move = self.convert(t_subtraction(t1, cur_pos))
-            # print(move)
-            cur_pos = t_addition(cur_pos, move)
-            moves.append(move)
+        x1, y1 = t1
+        x2, y2 = t2
+        x_dist, y_dist = abs(x1 - x2), abs(y1 - y2)
+        # print(x_dist, y_dist)
+        return DIAGONAL * min(x_dist, y_dist) + abs(x_dist - y_dist) * 10
 
-        output = 0
-        for i in moves:
-            if is_diagonal(i):
-                output += DIAGONAL
-            else:
-                output += STRAIGHT
-
-        return output
 
     def convert(self, t):
         output = [None, None]
