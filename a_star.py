@@ -1,4 +1,4 @@
-from time import time
+# from time import time
 STRAIGHT = 10
 DIAGONAL = 14
 t_addition = lambda t1, t2: (t1[0] + t2[0], t1[1] + t2[1])
