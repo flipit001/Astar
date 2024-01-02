@@ -100,7 +100,7 @@ class A_Star:
 
     def get_f_cost(self, t):
         if self.in_bound(t):
-            return self.dist_from(self.start, t) + self.dist_from(self.end, t)
+            return self.dist_from(self.end, t)
         else:
             return 0
 
@@ -143,12 +143,13 @@ class A_Star:
 
 
 if __name__ == "__main__":
+    start = (4, 0)
     a_star = A_Star(
-        [[1, 0, 0, 0], [0, 9, 0, 0], [0, 9, 0, 0], [9, 9, 0, 0], [2, 0, 0, 0]],
-        (0, 0),
-        (4, 0),
+        [[0, 0, 0, 0, 1], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]],
+        start,
+        (0, 4),
     )
-    score, path = a_star.explore((0, 0))
+    score, path = a_star.explore(start)
     print(f"solution is {path[::-1]};")
 
     print(f"took {a_star.moves} iterations to find solution")
